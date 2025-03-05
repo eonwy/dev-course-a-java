@@ -29,7 +29,7 @@ public class A_Print {
         // %s : 문자열
         // %f : 실수형
         // %b : 논리형
-        System.out.printf("주문자명 : %s\n", "하명도");
+        System.out.printf("주문자명 : %s\n", "김예원");
 
         // 정렬 : %5d, %-5d, %.2f
         // %5d : 5칸 공간 확보, 우측 정렬

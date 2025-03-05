@@ -5,8 +5,8 @@ public class D_문자열결합 {
     public static void main(String[] args) {
 
         // NOTE CD01 문자열 결합
-        String name = "하명도";
-        String job = "강사";
+        String name = "김예원";
+        String job = "학생";
         String lecture = name + ":" + job;
 
         System.out.println(lecture);
