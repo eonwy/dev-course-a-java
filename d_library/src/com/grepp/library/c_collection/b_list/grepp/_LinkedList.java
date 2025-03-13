@@ -4,7 +4,7 @@ import com.grepp.library.c_collection.z_domain.Node;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class _LinkedList<E> implements Iterable<E> {
+public class _LinkedList<E> implements _List<E> {
 
     private Node<E> head;
     private int pointer;
@@ -43,13 +43,11 @@ public class _LinkedList<E> implements Iterable<E> {
 
         Node<E> newNode = new Node<>(element);
 
-        // 0번째 인덱스에 추가할 경우
         if (index == 0) {
             newNode.setNext(head);
             head = newNode;
             pointer++;
         } else {
-            // 그 외 경우
             Node<E> link = head;
             Node<E> prev = null;
             for (int i = 0; i < index; i++) {
@@ -87,29 +85,41 @@ public class _LinkedList<E> implements Iterable<E> {
         return modified;
     }
 
-    public E remove(int index){
-        if(index < 0 || index >= pointer) throw new IndexOutOfBoundsException();
-
-        Node<E> link = head;
-        Node<E> prevNode = head;
-
-        if(index == 0){
-            head = head.next();
-            pointer--;
-            return prevNode.data();
+    public boolean remove(E e){
+        if (head == null) {
+            return false;
         }
 
-        for(int i = 0; i < index; i++){
+        Node<E> link = head;
+        Node<E> prevNode = null;
+
+        while (link != null) {
+            if (link.data().equals(e)) {
+                if (prevNode == null) {
+                    head = link.next();
+                } else {
+                    prevNode.setNext(link.next());
+                }
+                pointer--;
+                return true;
+            }
             prevNode = link;
             link = link.next();
         }
-
-        prevNode.setNext(link.next());
-        pointer--;
-        return link.data();
+        return false;
     }
 
+    public boolean contains(E e){
+        Node<E> link = head;
+        while(link != null){
+            if(link.data().equals(e)) return true;
+            link = link.next();
+        }
+        return false;
+    }
 
+    // 단지 함수 호출을 위해 사용하고자 하는 것이니
+    // 익명클래스로 제작함
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {

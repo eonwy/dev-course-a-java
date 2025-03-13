@@ -88,7 +88,7 @@ public class Run {
         System.out.println(list.get(0));
     }
 
-    private static void pracGet() {
+    public static void pracGet() {
         List<String> list = new ArrayList<>();
         list.add("안녕");
         list.add("hi");
