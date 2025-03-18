@@ -3,9 +3,11 @@ package com.grepp.library.c_collection.c_set.grepp;
 import com.grepp.library.c_collection.b_list.grepp._LinkedList;
 import com.grepp.library.c_collection.z_domain.Node;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 @SuppressWarnings("unchecked")
-public class _HashSet<E> {
+public class _HashSet<E> implements Iterable<E> {
 
     private static final int DEFAULT_CAPACITY= 10;
     protected Object[] elementData;
@@ -33,7 +35,7 @@ public class _HashSet<E> {
         arraySize *= 2;
         Object[] temp = new Object[arraySize];
 
-        for (int i = 0; i < arraySize; i++) {
+        for (int i = 0; i < elementData.length; i++) {
             if(elementData[i] == null) continue;
             int newIndex = hash((E) elementData[i]);
             temp[newIndex] = elementData[i];
@@ -103,5 +105,40 @@ public class _HashSet<E> {
 
         sb.append("]");
         return sb.toString();
+    }
+
+
+    @Override
+    public Iterator<E> iterator() {
+        return new Iterator<E>() {
+            private int pointer, pointer1, index;
+            @Override
+            public boolean hasNext() {
+                return pointer < size();
+            }
+
+            @Override
+            public E next() {
+                if(pointer >= size()) throw new NoSuchElementException();
+                _LinkedList<E> data = (_LinkedList<E>) elementData[index];
+                while( elementData[index] == null){
+                    System.out.println(pointer + ":" + pointer1 + ":" + index);
+
+                    index++;
+                }
+                E e = (E) elementData[index];
+                if(pointer1 < data.size()){
+                    e = data.get(pointer1);
+                    pointer1++;
+                    pointer++;
+                    if(pointer1 >= data.size()){
+                        pointer1 = 0;
+                        index++;
+                    }
+                }
+
+                return e;
+            }
+        };
     }
 }

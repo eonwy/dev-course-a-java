@@ -10,8 +10,8 @@ import java.util.List;
 public class Run {
 
     public static void main(String[] args) {
-//        pracAdd();
-        pracRemove();
+        pracAdd();
+//        pracRemove();
 //
 //        List<String> firstList = List.of(
 //            "정성찬",
@@ -60,9 +60,7 @@ public class Run {
             set.add(school);
         }
 
-        System.out.println(set);
         set.remove(new School("민사고", "대전", 3));
-        System.out.println(set);
     }
 
     private static void pracAdd() {
@@ -73,6 +71,10 @@ public class Run {
         for (School school : list) {
             System.out.println(school);
             System.out.println(set.add(school));
+        }
+
+        for (School school : list) {
+            System.out.println(school);
         }
 
         System.out.println(set);
