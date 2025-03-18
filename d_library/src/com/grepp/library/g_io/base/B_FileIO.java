@@ -1,6 +1,5 @@
 package com.grepp.library.g_io.base;
 
-import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -29,18 +28,19 @@ public class B_FileIO {
         //readFile();
         copyFile();
     }
-    private static void copyFile() {
-        String sourcePath = "/Users/eonwy/Programmers/backend/source.zip";
-        String outputPath = "./copy.zip";
 
-        try (
+    private static void copyFile() {
+        String sourcePath = "C:\\backend\\a_java.zip";
+        String outputPath = "./copy.zip";
+        try(
             FileInputStream fis = new FileInputStream(sourcePath);
             FileOutputStream fos = new FileOutputStream(outputPath);
-        ) {
+        ){
+
             long start = System.currentTimeMillis();
 
             int data = 0;
-            while ((data - fis.read()) != -1) {
+            while((data = fis.read()) != -1) {
                 fos.write(data);
             }
 
@@ -48,8 +48,10 @@ public class B_FileIO {
             System.out.println("no buffer : " + (end - start));
 
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
+
+
     }
 
     private static void readFile() {
@@ -58,10 +60,8 @@ public class B_FileIO {
         String fileName = sc.nextLine();
 
         try(FileInputStream fis = new FileInputStream(fileName)){
-
             byte[] bytes = fis.readAllBytes();
             System.out.println(new String(bytes, StandardCharsets.UTF_8));
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

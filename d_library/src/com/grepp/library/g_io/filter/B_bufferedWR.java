@@ -1,11 +1,13 @@
-package com.grepp.library.g_io.base;
+package com.grepp.library.g_io.filter;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class C_FileWR {
+public class B_bufferedWR {
 
     public static void main(String[] args) {
         //writeFile();
@@ -17,15 +19,17 @@ public class C_FileWR {
         System.out.print("읽어올 파일명을 작성 : ");
         String fileName = sc.nextLine();
 
-        try(FileReader reader = new FileReader(fileName)){
-            int data = 0;
+        try(BufferedReader reader = new BufferedReader(new FileReader(fileName))){
             StringBuffer sb = new StringBuffer();
+            String line = "";
 
-            while((data = reader.read()) != -1) {
-                sb.append((char)data);
+            while(line != null){
+                sb.append(line).append("\n");
+                line = reader.readLine();
             }
 
-            System.out.println(sb.toString());
+            System.out.println(sb);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -38,7 +42,7 @@ public class C_FileWR {
         System.out.print("내용 : ");
         String content = sc.nextLine();
 
-        try(FileWriter writer = new FileWriter(filename, true)) {
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true))) {
             writer.write(content);
         } catch (IOException e) {
             e.printStackTrace();
