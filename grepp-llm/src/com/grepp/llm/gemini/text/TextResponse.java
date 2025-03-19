@@ -1,10 +1,11 @@
-package com.grepp.mc.infra.llm.gemini.text;
+package com.grepp.llm.gemini.text;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.grepp.mc.infra.llm.Response;
-import com.grepp.mc.infra.llm.gemini.text.vo.ResponseDocument;
+
+import com.grepp.llm.gemini.Response;
+import com.grepp.llm.gemini.text.vo.ResponseDocument;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +18,7 @@ public class TextResponse implements Response {
     }
 
     @Override
-    public Map<String, Object> response() {
+    public List<Map<String, Object>> response() {
         Gson gson = new GsonBuilder()
             .serializeNulls()
             .setPrettyPrinting()
@@ -31,7 +32,6 @@ public class TextResponse implements Response {
             .text();
 
         TypeToken<List<Map<String, Object>>> listType = new TypeToken<>() {};
-        List<Map<String, Object>> res = gson.fromJson(partText, listType.getType());
-        return Map.of("data", res);
+        return gson.fromJson(partText, listType.getType());
     }
 }

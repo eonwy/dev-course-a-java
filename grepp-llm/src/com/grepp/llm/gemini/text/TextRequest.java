@@ -1,9 +1,10 @@
-package com.grepp.mc.infra.llm.gemini.text;
+package com.grepp.llm.gemini.text;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.grepp.mc.infra.llm.Request;
-import com.grepp.mc.infra.llm.gemini.text.vo.RequestDocument;
+import com.grepp.llm.gemini.Request;
+import com.grepp.llm.gemini.text.vo.RequestDocument;
+
 
 public class TextRequest<T> implements Request {
 
